@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Escape Room - El Laboratorio del Conocimiento</title>
+
+    <link rel="stylesheet" href="juegodemesa.css">
+
+</head>
+
+<body>
+
+    <!-- ========================================= -->
+    <!-- PANTALLA DE INICIO -->
+    <!-- ========================================= -->
+
+    <section id="pantallaInicio" class="pantalla">
+
+        <div class="contenedor">
+
+            <h1>🧪 Escape Room</h1>
+
+            <h2>El Laboratorio del Conocimiento</h2>
+
+            <p class="descripcion">
+
+                Un fallo en el sistema de seguridad ha bloqueado todas las
+                salidas del laboratorio.
+
+                Para escapar deberán superar los desafíos de distintas
+                ciencias, mantener estable el laboratorio y descubrir el
+                código secreto que abrirá la puerta final.
+
+            </p>
+
+            <button id="btnComenzar">
+
+                COMENZAR
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- PANTALLA MODO DE JUEGO -->
+    <!-- ========================================= -->
+
+    <section id="pantallaModo" class="pantalla oculto">
+
+        <div class="contenedor">
+
+            <h1>Modo de juego</h1>
+
+            <p>
+
+                ¿Cómo desean jugar?
+
+            </p>
+
+            <div class="opcionesModo">
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="modoJuego"
+                        value="individual"
+                        checked>
+
+                    Individual
+
+                </label>
+
+                <label>
+
+                    <input
+                        type="radio"
+                        name="modoJuego"
+                        value="multijugador">
+
+                    Multijugador
+
+                </label>
+
+            </div>
+
+            <button id="btnModo">
+
+                CONTINUAR
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- CONFIGURACIÓN DE JUGADORES -->
+    <!-- ========================================= -->
+
+    <section id="pantallaJugadores"
+             class="pantalla oculto">
+
+        <div class="contenedor">
+
+            <h1>Configuración</h1>
+
+            <p>
+
+                Selecciona la cantidad de jugadores.
+
+            </p>
+
+            <select id="cantidadJugadores">
+
+                <option value="1">1 jugador</option>
+
+                <option value="2">2 jugadores</option>
+
+                <option value="3">3 jugadores</option>
+
+                <option value="4">4 jugadores</option>
+
+                <option value="5">5 jugadores</option>
+
+            </select>
+
+            <hr>
+
+            <h2>
+
+                Nombres
+
+            </h2>
+
+            <!--
+                JavaScript generará automáticamente
+                los campos para escribir los nombres.
+            -->
+
+            <div id="listaJugadores">
+
+            </div>
+
+            <button id="btnCrearPartida">
+
+                INICIAR MISIÓN
+
+            </button>
+
+        </div>
+
+    </section>
+
+        <!-- ========================================= -->
+    <!-- INTRODUCCIÓN -->
+    <!-- ========================================= -->
+
+    <section id="pantallaIntro" class="pantalla oculto">
+
+        <div class="contenedor">
+
+            <h1>🖥️ Sistema del Laboratorio</h1>
+
+            <div id="textoIntro">
+
+                <!-- JavaScript escribirá aquí la introducción -->
+
+            </div>
+
+            <button id="btnEntrarLaboratorio" class="oculto">
+
+                ENTRAR AL LABORATORIO
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- LABORATORIO -->
+    <!-- ========================================= -->
+
+    <section id="pantallaLaboratorio" class="pantalla oculto">
+
+        <header>
+
+            <h1>
+
+                🧪 Laboratorio del Conocimiento
+
+            </h1>
+
+        </header>
+
+
+
+        <div class="panelJuego">
+
+            <!-- Información del jugador -->
+
+            <aside class="panelIzquierdo">
+
+                <h2>
+
+                    Jugador actual
+
+                </h2>
+
+                <h3 id="nombreJugadorActual">
+
+                    -
+
+                </h3>
+
+                <h2>
+
+                    Vidas
+
+                </h2>
+
+                <div id="vidasJugador">
+
+                    ❤️❤️❤️
+
+                </div>
+
+                <h2>
+
+                    ⭐ Puntaje
+
+                </h2>
+
+                <div id="puntajeJugador">
+
+                    0
+
+                </div>
+
+            </aside>
+
+
+
+            <!-- Centro -->
+
+            <main class="panelCentral">
+
+                <div class="contenedorEstabilidad">
+
+                    <h2>
+
+                        ⚠ Estabilidad del laboratorio
+
+                    </h2>
+
+                    <progress
+                        id="barraEstabilidad"
+                        value="100"
+                        max="100">
+
+                    </progress>
+
+                    <span id="porcentajeEstabilidad">
+
+                        100%
+
+                    </span>
+
+                </div>
+
+
+
+                <div class="contenedorCodigo">
+
+                    <h2>
+
+                        🔐 Código obtenido
+
+                    </h2>
+
+                    <div id="codigoVisual">
+
+                        _ _ _ _ _ _ _ _ _ _ _
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="contenedorSala">
+
+                    <div id="iconoSalaActual">
+
+                        🧬
+
+                    </div>
+
+                    <h2 id="nombreSalaActual">
+
+                        Biología
+
+                    </h2>
+
+                    <p id="objetivoSala">
+
+                        Supera las cinco preguntas para obtener el primer número.
+
+                    </p>
+
+                    <button id="btnEntrarSala">
+
+                        ENTRAR A LA SALA
+
+                    </button>
+
+                </div>
+
+            </main>
+
+
+
+            <!-- Registro -->
+
+            <aside class="panelDerecho">
+
+                <h2>
+
+                    📋 Registro
+
+                </h2>
+
+                <div id="registroEventos">
+
+                    <p>
+
+                        Esperando el inicio de la misión...
+
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- SALA -->
+    <!-- ========================================= -->
+
+    <section id="pantallaSala" class="pantalla oculto">
+
+
+
+        <div id="introduccionSala">
+
+    <h2 id="tituloLaboratorio"></h2>
+
+    <p>
+        <strong>Estado:</strong>
+        Base de datos dañada.
+    </p>
+
+    <button id="btnComenzarDesafio">
+        COMENZAR DESAFÍO
+    </button>
+
+</div>
+
+        <div class="contenedorSalaPregunta">
+
+            <div id="iconoSalaGrande">
+
+                🧬
+
+            </div>
+
+            <h1 id="tituloSala">
+
+                BIOLOGÍA
+
+            </h1>
+
+            <p id="objetivoActual">
+
+                Supera las cinco preguntas.
+
+            </p>
+
+            <hr>
+
+        <div id="contenidoDesafio">
+
+            <h2>
+
+                Pregunta
+
+                <span id="contadorPregunta">
+
+                    1 / 5
+
+                </span>
+
+            </h2>
+
+            <p id="preguntaActual">
+
+                Aquí aparecerá la pregunta.
+
+            </p>
+
+            <div id="opcionesRespuesta">
+
+                <!-- JavaScript genera las opciones -->
+
+            </div>
+
+            <button id="btnResponder">
+
+                RESPONDER
+
+            </button>
+
+
+        </div>
+
+            <div id="mensajeRespuesta">
+
+            </div>
+
+            <hr>
+
+            <div class="panelInferiorSala">
+
+                <div>
+
+                    Turno
+
+                    <strong id="turnoActual">
+
+                    </strong>
+
+                </div>
+
+                <div>
+
+                    ❤️
+
+                    <span id="vidasActuales">
+
+                        ❤️❤️❤️
+
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+        <!-- ========================================= -->
+    <!-- PANTALLA FINAL -->
+    <!-- ========================================= -->
+
+    <section id="pantallaFinal" class="pantalla oculto">
+
+        <div class="contenedor">
+
+            <h1>
+
+                🚪 Puerta de Escape
+
+            </h1>
+
+            <p>
+
+                Han reunido todos los dígitos.
+
+                Introduzcan el código final para abrir la puerta.
+
+            </p>
+
+            <div id="codigoIngresado">
+
+                <input
+                    type="text"
+                    id="inputCodigo"
+                    maxlength="11"
+                    placeholder="Código de 11 dígitos">
+
+            </div>
+
+            <button id="btnAbrirPuerta">
+
+                ABRIR PUERTA
+
+            </button>
+
+            <div id="mensajeFinal">
+
+            </div>
+
+            <hr>
+
+            <h2>
+
+                🏆 Ranking Final
+
+            </h2>
+
+            <div id="rankingJugadores">
+
+                <!-- JavaScript genera el ranking -->
+
+            </div>
+
+            <button id="btnReiniciar">
+
+                JUGAR NUEVAMENTE
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+<!-- ========================================= -->
+<!-- PANTALLA DESCIFRANDO CÓDIGO -->
+<!-- ========================================= -->
+
+<section id="pantallaCodigo" class="pantalla oculto">
+
+    <div class="contenedor">
+
+        <h1>
+
+            🔓 Descifrando Código
+
+        </h1>
+
+        <p id="textoDescifrado">
+
+            Conectando con el servidor...
+
+        </p>
+
+        <progress
+            id="barraDescifrado"
+            value="0"
+            max="100">
+        </progress>
+
+        <h2 id="codigoEncontrado">
+
+        </h2>
+
+    </div>
+
+</section>
+
+
+    <!-- ========================================= -->
+    <!-- GAME OVER -->
+    <!-- ========================================= -->
+
+    <section id="pantallaGameOver"
+             class="pantalla oculto">
+
+        <div class="contenedor">
+
+            <h1>
+
+                ☢ GAME OVER
+
+            </h1>
+
+            <h2>
+
+                El laboratorio ha colapsado
+
+            </h2>
+
+            <p>
+
+                Todos los jugadores fueron eliminados
+                o la estabilidad del laboratorio llegó a cero.
+
+            </p>
+
+            <button id="btnIntentarOtraVez">
+
+                VOLVER A INTENTAR
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ========================================= -->
+    <!-- AUDIO -->
+    <!-- ========================================= -->
+
+    <!-- Música de fondo -->
+    <audio
+        id="musicaFondo"
+        loop>
+
+    </audio>
+
+    <!-- Sonido correcto -->
+    <audio
+        id="sonidoCorrecto">
+
+    </audio>
+
+    <!-- Sonido incorrecto -->
+    <audio
+        id="sonidoIncorrecto">
+
+    </audio>
+
+    <!-- Victoria -->
+    <audio
+        id="sonidoVictoria">
+
+    </audio>
+
+    <!-- Derrota -->
+    <audio
+        id="sonidoDerrota">
+
+    </audio>
+
+
+
+    <script src="juegodemesa.js"></script>
+
+</body>
+
+</html>
